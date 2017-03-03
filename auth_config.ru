@@ -8,7 +8,8 @@ AUTHOR_SESSION_TIMEOUT =  86400 # 24 hours by default.
 
 #File.expand_path(File.join(File.dirname(__FILE__), MEDIASCAPE_WIKI_GIT_REPO_PATH)) 
 
-gollum_path = MEDIASCAPE_WIKI_GIT_REPO_PATH puts "gollum_path: #{gollum_path}"
+gollum_path = MEDIASCAPE_WIKI_GIT_REPO_PATH 
+puts "gollum_path: #{gollum_path}"
 
 Precious::App.set(:gollum_path, gollum_path)
 Precious::App.set(:default_markup, :markdown)
@@ -19,7 +20,7 @@ Precious::App.set(:wiki_options, {
   :ref => MEDIASCAPE_WIKI_GIT_REPO_REF}
 )
 
-Precious..App.set(:bind, '0.0.0.0') 
+Precious::App.set(:bind, '0.0.0.0') 
 
 module Precious
   class App < Sinatra::Base
