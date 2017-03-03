@@ -4,6 +4,8 @@ require 'gollum/app'
 
 MEDIASCAPE_WIKI_GIT_REPO_PATH = "/home/marketron/wiki"  # CHANGE THIS TO POINT TO THE WIKI REPO
 MEDIASCAPE_WIKI_GIT_REPO_REF = "mediascape-integration" # CHANGE THIS TO REFERENCE THE GIT BRANCH  
+AUTHOR_SESSION_TIMEOUT =  86400 # 24 hours by default. 
+
 #File.expand_path(File.join(File.dirname(__FILE__), MEDIASCAPE_WIKI_GIT_REPO_PATH)) 
 
 gollum_path = MEDIASCAPE_WIKI_GIT_REPO_PATH puts "gollum_path: #{gollum_path}"
@@ -72,8 +74,8 @@ class AuthorApp < Sinatra::Base
   end
 end
 
-use Rack::Session::Cookie, { :key => 'rack.session', :secret => "Password01", :expire_after => (1 * 24 * 60 * 60) }
-
+use Rack::Session::Cookie, { :key => 'rack.session', :secret => "**********", :expire_after => AUTHOR_SESSION_TIMEOUT }
+                                                                  
 # Boot apps
 run Rack::URLMap.new("/help" => Precious::App.new,
                      "/author" => AuthorApp.new)
