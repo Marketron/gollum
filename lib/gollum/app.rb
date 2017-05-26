@@ -488,6 +488,13 @@ module Precious
         /(.+) # capture any path after the "/pages" excluding the leading slash
       )?      # end the optional non-capturing group
     }x do |path|
+      #[ATT] Fixed a breadcrumb bug - when gollum is embedded into a Rails app
+      # a trailing slash in the URL somehow gets stripped off and this breaks the extract_path method,
+      # which expects to have a trailing slash on directory URLs. 
+      # Note that the extract_path method also is used for extracting paths for downloadable resources, 
+      # like, ../icon.png, so placing this fix inside that method will brake the loaded resource case. Instead, keeping this 
+      # fix local to this specifc HTTP action where the issue was observed.     
+      file_path = path[path.length-1] != '/' ? path << '/' : path if path 
       @path        = extract_path(path) if path
       wiki_options = settings.wiki_options.merge({ :page_file_dir => @path })
       wiki         = Gollum::Wiki.new(settings.gollum_path, wiki_options)
