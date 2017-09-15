@@ -24,7 +24,8 @@ Gem::Specification.new do |s|
   s.rdoc_options = ['--charset=UTF-8']
   s.extra_rdoc_files = %w[README.md LICENSE]
 
-  s.add_dependency 'gollum-lib', '~> 5.0.a'
+#  s.add_dependency 'gollum-lib', '~> 5.0.a'
+  s.add_dependency 'gollum-lib', '~> 4.2.5'
   s.add_dependency 'kramdown', '~> 1.14.0'
   s.add_dependency 'sinatra', '~> 2.0'
   s.add_dependency 'mustache-sinatra', '~> 1.0.0'
